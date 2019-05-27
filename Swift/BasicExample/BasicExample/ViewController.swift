@@ -1,10 +1,13 @@
 import AVFoundation
 import GoogleInteractiveMediaAds
 import UIKit
+import AVKit
+import MediaPlayer
+
 
 class ViewController: UIViewController, IMAAdsLoaderDelegate, IMAAdsManagerDelegate {
 
-  static let kTestAppContentUrl = "https://5b44cf20b0388.streamlock.net:8443/live/ngrp:live_all/playlist.m3u8"
+  static let kTestAppContentUrl = "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
 
   @IBOutlet weak var playButton: UIButton!
   @IBOutlet weak var videoView: UIView!
@@ -32,7 +35,23 @@ class ViewController: UIViewController, IMAAdsLoaderDelegate, IMAAdsManagerDeleg
 
   override func viewDidAppear(_ animated: Bool) {
     playerLayer?.frame = self.videoView.layer.bounds
+    setupAirplayButton()
+    enablePlaybackInBackground()
   }
+
+    private func setupAirplayButton() {
+        let volumeView = MPVolumeView()
+        videoView?.addSubview(volumeView)
+    }
+
+    private func enablePlaybackInBackground() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("error")
+        }
+    }
 
   @IBAction func onPlayButtonTouch(_ sender: AnyObject) {
     //contentPlayer.play()
@@ -47,6 +66,7 @@ class ViewController: UIViewController, IMAAdsLoaderDelegate, IMAAdsManagerDeleg
       return
     }
     contentPlayer = AVPlayer(url: contentURL)
+    contentPlayer?.usesExternalPlaybackWhileExternalScreenIsActive = true
 
     // Create a player layer for the player.
     playerLayer = AVPlayerLayer(player: contentPlayer)
@@ -72,7 +92,10 @@ class ViewController: UIViewController, IMAAdsLoaderDelegate, IMAAdsManagerDeleg
   }
 
   func setUpAdsLoader() {
-    adsLoader = IMAAdsLoader(settings: nil)
+
+    let settings = IMASettings()
+    settings.enableBackgroundPlayback = true
+    adsLoader = IMAAdsLoader(settings: settings)
     adsLoader.delegate = self
   }
 

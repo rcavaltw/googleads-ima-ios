@@ -97,7 +97,6 @@
 				0609E59E255FF15DA2E5F80C /* Pods-BasicExample.debug.xcconfig */,
 				BE184CFF04D30847A3DAD995 /* Pods-BasicExample.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -136,6 +135,11 @@
 					158CD7FD1AF7BDCF00EFC0B0 = {
 						CreatedOnToolsVersion = 6.3;
 						LastSwiftMigration = 0900;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -344,7 +348,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.google.ima.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -361,7 +365,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.google.ima.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
