@@ -4,7 +4,7 @@ import UIKit
 
 class ViewController: UIViewController, IMAAdsLoaderDelegate, IMAAdsManagerDelegate {
 
-  static let kTestAppContentUrl_MP4 = "http://rmcdn.2mdn.net/Demo/html5/output.mp4"
+  static let kTestAppContentUrl = "https://5b44cf20b0388.streamlock.net:8443/live/ngrp:live_all/playlist.m3u8"
 
   @IBOutlet weak var playButton: UIButton!
   @IBOutlet weak var videoView: UIView!
@@ -42,7 +42,7 @@ class ViewController: UIViewController, IMAAdsLoaderDelegate, IMAAdsManagerDeleg
 
   func setUpContentPlayer() {
     // Load AVPlayer with path to our content.
-    guard let contentURL = URL(string: ViewController.kTestAppContentUrl_MP4) else {
+    guard let contentURL = URL(string: ViewController.kTestAppContentUrl) else {
       print("ERROR: please use a valid URL for the content URL")
       return
     }
