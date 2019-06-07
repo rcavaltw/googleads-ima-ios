@@ -31,7 +31,13 @@ class ViewController: UIViewController, IMAAdsLoaderDelegate, IMAAdsManagerDeleg
 
     setUpContentPlayer()
     setUpAdsLoader()
+
+    NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
   }
+
+    @objc func didEnterBackground() {
+        adsManager?.destroy()
+    }
 
   override func viewDidAppear(_ animated: Bool) {
     playerLayer?.frame = self.videoView.layer.bounds
